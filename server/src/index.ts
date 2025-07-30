@@ -5,9 +5,10 @@ import { BASE_PROMPT, getSystemPrompt } from "./prompt";
 import { reactBasePrompt } from "./defaults/react";
 import { expressBasePrompt } from "./defaults/express";
 config();
-
+import cors from "cors";
 const app = express()
 const ai = new GoogleGenAI({});
+app.use(cors())
 app.use(express.json());
 app.post('/template', async (req, res) => {
     const propmt = req.body.prompt;
@@ -25,12 +26,12 @@ app.post('/template', async (req, res) => {
                 prompts: [BASE_PROMPT, `Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${reactBasePrompt}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n`],
                 uiPrompts: [reactBasePrompt]
             })
-        }   else if (response.text === "express") {
+        } else if (response.text === "express") {
             res.json({
-                prompts: [BASE_PROMPT, `Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${expressBasePrompt}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n`],
-                uiPrompts: [BASE_PROMPT]
-            })              
-        }     
+                artifact: [BASE_PROMPT, `Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${expressBasePrompt}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n`],
+                prompt: [BASE_PROMPT]
+            })
+        }
     } catch (error) {
         console.error("Error generating content:", error);
         res.status(500).json({
@@ -43,7 +44,7 @@ app.post('/template', async (req, res) => {
 
 app.post('/generate', async (req, res) => {
     const propmt = req.body.prompt;
-    const response = await ai.models.generateContentStream({
+    const response = await ai.models.generateContent({
         model: "gemini-2.5-pro",
         config: {
             temperature: 1.0,
@@ -54,13 +55,14 @@ app.post('/generate', async (req, res) => {
             role: "user"
         },
     });
-    for await (const chunk of response) {
-
-        console.log(chunk.text);
+    if (!response.text) {
+        return res.status(500).json({
+            error: "No response text received from AI model"
+        });
     }
-
+    console.log("AI Response:", response.text);
     res.json({
-        message: response,
+        response: response.text,
     })
 })
 
