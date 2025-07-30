@@ -4,6 +4,7 @@ export function ChatBox() {
       <div className="flex-1 overflow-y-auto">
         {/* Chat messages go here */}
       </div>
+     
       <div className="mt-4">
         {/* Input field for new messages */}
       </div>
