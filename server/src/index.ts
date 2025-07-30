@@ -62,7 +62,7 @@ app.post('/generate', async (req, res) => {
                         text: String(propmt.artifact),
                     }
                 ],
-                // text: String(propmt.artifact),
+                 
                 role: "user"
             }
         })
