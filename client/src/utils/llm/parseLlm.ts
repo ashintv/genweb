@@ -1,3 +1,4 @@
+import { StepType, type Step } from "@/lib/types";
 
 /*
  * Parse input XML and convert it into steps.
@@ -34,7 +35,7 @@ export function parseXml(response: string): any[] {
       return [];
     }
     const xmlContent = xmlMatch[1];
-    const steps:any = [];
+    const steps:Step [] = [];
     let stepId = 1;
     // Extract artifact title
     const titleMatch = response.match(/title="([^"]*)"/);
@@ -44,7 +45,7 @@ export function parseXml(response: string): any[] {
       id: stepId++,
       title: artifactTitle,
       description: '',
-      type: 'CreateFolder',
+      type: StepType.CreateFolder,
       status: 'pending'
     });
     // Regular expression to find boltAction elements
@@ -58,7 +59,7 @@ export function parseXml(response: string): any[] {
           id: stepId++,
           title: `Create ${filePath || 'file'}`,
           description: '',
-          type: 'CreateFile',
+          type:StepType.CreateFile,
           status: 'pending',
           code: content.trim(),
           path: filePath
@@ -69,7 +70,7 @@ export function parseXml(response: string): any[] {
           id: stepId++,
           title: 'Run command',
           description: '',
-          type: 'RunScript',
+          type: StepType.RunScript,
           status: 'pending',
           code: content.trim()
         });
