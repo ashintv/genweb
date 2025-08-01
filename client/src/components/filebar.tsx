@@ -1,10 +1,8 @@
 import type { FileItem } from "@/lib/types";
 import { Button } from "./ui/button";
-import { Type } from "lucide-react";
-import { TypeScriptIcon } from "./icons/typescript";
-import { TypeScriptIconReact } from "./icons/tsx-react";
 import { DirectoryIcon } from "./icons/directory";
 import { useState } from "react";
+import { LanguageIcon } from "./icons/codeEditor";
 
 interface FilebarProps {
     setSelectedFile: React.Dispatch<React.SetStateAction<FileItem>>;
@@ -18,7 +16,7 @@ export const FileBar = ({
     files,
 }: FilebarProps) => {
     return (
-        <div className="flex flex-col w-fit bg-[#232323]">
+        <div className="flex  flex-col w-fit bg-[#232323]">
             <div>
                 <h1 className="text-white text-xs font-bold p-2">EXPLORER</h1>
             </div>
@@ -48,14 +46,14 @@ function FilebarItem({
     return (
         <div className="ml-2">
             {file.type === "file" && (
-                
+
                 <Button
                     onClick={() => onFileSelect(file)}
                     className={`bg-transparent pr-8 m-0 min-w-20 hover:bg-[#1b1a1a] rounded-none h-6 text-white py-0 w-full text-[10px] flex justify-start ${isSelected ? "bg-[#2d2d2d]" : ""
                         }`}
                 >
-                    {/* <TypeScriptIcon /> */}
-                    {<TypeScriptIconReact/>}
+                    
+                    <LanguageIcon iconName={file.path.split(".").pop()!} />
                     {file.name}
                 </Button>
             )}
@@ -64,8 +62,8 @@ function FilebarItem({
                 <div className={`pl-2 `}>
                     <div className="text-white text-[10px] font-bold hover:bg-[#1b1a1a]  flex gap-1 items-center" onClick={() => setIsFolderOpen(!isFolderOpen)}><DirectoryIcon className={`${isFolderOpen ? "rotate-90" : ""}`} /> {file.name}</div>
                     {isFolderOpen && file.children?.map((child) => (
-                        <div className="border-l border-gray-600"  key={child.path}>
-                            
+                        <div className="border-l border-gray-600" key={child.path}>
+
                             <FilebarItem
                                 key={child.path}
                                 file={child}

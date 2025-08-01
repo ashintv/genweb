@@ -62,7 +62,7 @@ export function parseXml(response: string): any[] {
           type:StepType.CreateFile,
           status: 'pending',
           code: content.trim(),
-          path: filePath
+          path: filePath,
         });
       } else if (type === 'shell') {
         // Shell command step

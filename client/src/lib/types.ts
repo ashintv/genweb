@@ -23,5 +23,6 @@ export interface FileItem {
     type: 'file' | 'folder';
     children?: FileItem[];
     content?: string;
+    language?: string;
     path: string;
 }
