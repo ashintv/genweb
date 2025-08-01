@@ -53,6 +53,11 @@ app.post("/template", async (req, res) => {
 
 app.post("/generate", async (req, res) => {
     res.setHeader("Content-Type", "text/plain");
+    console.log("Received request to /generate with body:", req.body);
+    const data = req.body.responseTemplate;
+    if ( !data.prompt || !data.artifact) {
+        return res.status(400).json({ error: "Invalid request body" });
+    }
     const body = req.body;
     try {
         const response = await ai.models.generateContentStream({
@@ -64,10 +69,10 @@ app.post("/generate", async (req, res) => {
             contents: {
                 parts: [
                     {
-                        text: String(body.prompt),
+                        text: String(data.prompt),
                     },
                     {
-                        text: String(body.artifact),
+                        text: String(data.artifact),
                     },
                 ],
                 role: "user",

@@ -13,6 +13,7 @@ export function useChatStream(setSteps: React.Dispatch<React.SetStateAction<Step
         const prompt = 'create a react app with a button that alerts says hello world';
         console.log("Sending request with prompt:", prompt);
         const response = await axios.post('http://localhost:3000/template', { prompt });
+        console.log("Received response:", response.data);
         setResponseTemplate(response.data);
         setSteps(parseXml(response.data.artifact[1]));
     }
@@ -45,6 +46,7 @@ export function useChatStream(setSteps: React.Dispatch<React.SetStateAction<Step
             console.log(`Received chunk: ${chunk}`);
             setData((prev) => prev + chunk);
         }
+
     }
 
     useEffect(() => {
