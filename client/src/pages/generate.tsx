@@ -7,13 +7,10 @@ import { parseXml } from "@/utils/llm/parseLlm";
 import { sample_response } from "@/utils/sample/samplefile";
 // import { trialParseData } from "@/utils/sample/samplefile";
 import axios from "axios";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 export function GeneratePage() {
-    const [steps, setSteps] = useState<Step[]>([]);
-    const [files, setFiles] = useState<FileItem[]>([]);
-    const { data } = useChatStream(setSteps)
-    useCodeEditor(files, steps, setFiles, setSteps);
+    const { data, steps, setSteps } = useChatStream()
+    const { files } = useCodeEditor(steps, setSteps);
     return (
         <div className='fixed flex h-screen'>
             <div className='h-full px-5'>
@@ -21,7 +18,7 @@ export function GeneratePage() {
                 <ChatBox data={data} steps={steps} />
             </div>
             <div className='p-10 h-full w-full'>
-                <CodeEditor  files={files} />
+                <CodeEditor files={files} />
             </div>
         </div>
     );

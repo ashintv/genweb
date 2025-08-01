@@ -3,10 +3,10 @@ import { parseXml } from "@/utils/llm/parseLlm";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export function useChatStream(setSteps: React.Dispatch<React.SetStateAction<Step[]>>) {
+export function useChatStream() {
     const [data, setData] = useState('');
     const [responseTemplate, setResponseTemplate] = useState<any>(null);
-
+    const [steps, setSteps] = useState<Step[]>([]);
 
     // INIT REQUEST RETURN INITIAL STEP AND ARTIFACT
     async function initSendRequest() {
@@ -69,6 +69,6 @@ export function useChatStream(setSteps: React.Dispatch<React.SetStateAction<Step
     }, [data, setSteps]);
 
     return {
-        data
+        data , steps, setSteps
     }
 }

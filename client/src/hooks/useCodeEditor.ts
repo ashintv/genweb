@@ -1,9 +1,9 @@
 import { StepType } from './../lib/types';
 import type { FileItem, Step } from "@/lib/types";
-import { useEffect } from "react";
-export function useCodeEditor(files: FileItem[], steps: Step[], setFiles: React.Dispatch<React.SetStateAction<FileItem[]>>, setSteps: React.Dispatch<React.SetStateAction<Step[]>>) {
+import { useEffect, useState } from "react";
+export function useCodeEditor(steps: Step[] , setSteps: React.Dispatch<React.SetStateAction<Step[]>>) {
+    const [files, setFiles] = useState<FileItem[]>([]);
     useEffect(() => {
-        console.log("useCodeEditor called with steps:", steps);
         let originalFiles = [...files];
         let updateHappened = false;
         steps.filter(({ status }) => status === "pending").map(step => {
@@ -85,5 +85,8 @@ export function useCodeEditor(files: FileItem[], steps: Step[], setFiles: React.
 
 
     }, [steps, files]);
+
+
+    return {files}
 
 }
