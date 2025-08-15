@@ -16,7 +16,7 @@ export const FileBar = ({
     files,
 }: FilebarProps) => {
     return (
-        <div className="flex  flex-col w-fit bg-[#232323]">
+        <div className="flex  flex-col w-fit h-full bg-[#232323]">
             <div>
                 <h1 className="text-white text-xs font-bold p-2">EXPLORER</h1>
             </div>
