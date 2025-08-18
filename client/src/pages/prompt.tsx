@@ -1,18 +1,20 @@
 
 import { Textarea } from "@/components/ui/textarea";
 import { usePromptStore } from "@/store/promptStore";
-import { useState } from "react";
+import { useRef, useState, type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import { useShallow } from "zustand/shallow";
 import { SendIcon } from "@/components/icons/send";
+import GlassNavbar from "@/components/glass-navbar";
 export function PromptPage() {
 	const [prompt, setPromptInp] = useState<string>("");
 	const setPrompt = usePromptStore(useShallow((state) => state.setPrompt));
 	const navigate = useNavigate();
+	const ref = useRef<HTMLDivElement>(null);
 
 	function handleSubmit() {
-		if (prompt.trim() === "") {
-			alert("Prompt cannot be empty");
+		if (!prompt.trim()) {
+			ref.current?.focus();
 			return;
 		}
 		setPrompt({
@@ -25,6 +27,7 @@ export function PromptPage() {
 
 	return (
 		<div className="w-screen h-screen backdrop-blur-md fixed flex flex-col justify-center items-center ">
+			<GlassNavbar />
 			<div className="flex flex-col gap-15">
 				<div className="text-center">
 					<div className="text-5xl  font-extrabold font-sans">
@@ -34,7 +37,7 @@ export function PromptPage() {
 						Because your presence should be unforgettable.
 					</div>
 				</div>
-				<div className=" bg-primary p-4  w-3xl rounded-4xl border">
+				<div className=" bg-primary p-4  w-3xl rounded-4xl border" ref={ref}>
 					<div className="max-h-96 overflow-y-auto">
 						<Textarea
 							value={prompt}

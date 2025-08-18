@@ -8,7 +8,6 @@ export function ChatBox({ steps, data }: {
     return content.replace(/<boltArtifact[\s\S]*?<\/boltArtifact>/g, "<>---<>");
   }
   const modifiedData = replaceBoltArtifactSection(data).split("<>");
-
   return (
     <div className=" rounded-t-2xl flex flex-col bg-black h-full w-xl p-4 border-l border-gray-700">
       <div className="flex-1 text-white overflow-y-auto">
