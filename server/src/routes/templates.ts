@@ -1,8 +1,8 @@
 import express from "express";
 import { ai } from "../config/agent-config";
 import { BASE_PROMPT } from "../lib/prompt";
-import { expressBasePrompt } from "../defaults/express";
-import { reactBasePrompt } from "../defaults/react";
+import { expressBasePrompt } from "../lib/defaults/express";
+import { reactBasePrompt } from "../lib/defaults/react";
 const TemplateRouter = express.Router();
 
 TemplateRouter.post("/", async (req, res) => {

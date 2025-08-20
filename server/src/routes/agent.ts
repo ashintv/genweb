@@ -3,8 +3,8 @@
 import express from "express";
 import { ai } from "../config/agent-config";
 import { getSystemPrompt } from "../lib/prompt";
-import { reactBasePrompt } from "../defaults/react";
-import { expressBasePrompt } from "../defaults/express";
+import { reactBasePrompt } from "../lib/defaults/react";
+import { expressBasePrompt } from "../lib/defaults/express";
 import { ApiError } from "@google/genai";
 const AgentRouter = express.Router();
 
