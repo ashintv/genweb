@@ -1,7 +1,7 @@
 
 import { Textarea } from "@/components/ui/textarea";
 import { usePromptStore } from "@/store/promptStore";
-import { useRef, useState, type ReactElement } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useShallow } from "zustand/shallow";
 import { SendIcon } from "@/components/icons/send";
@@ -37,7 +37,7 @@ export function PromptPage() {
 						Because your presence should be unforgettable.
 					</div>
 				</div>
-				<div className=" bg-primary p-4  w-3xl rounded-4xl border" ref={ref}>
+				<div className=" bg-primary p-4  w-3xl rounded-4xl border focus:border-chart-3" ref={ref} tabIndex={-1}>
 					<div className="max-h-96 overflow-y-auto">
 						<Textarea
 							value={prompt}
