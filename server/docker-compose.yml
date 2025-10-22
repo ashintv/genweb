@@ -1,0 +1,9 @@
+services:
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: aettrix-db-v0
+    ports:
+      - "5432:5432"
