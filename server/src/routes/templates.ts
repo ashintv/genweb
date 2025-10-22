@@ -1,10 +1,10 @@
 import express from "express";
-import { ai } from "../config/agent-config";
 import { BASE_PROMPT } from "../lib/prompt";
 import { expressBasePrompt } from "../lib/defaults/express";
 import { reactBasePrompt } from "../lib/defaults/react";
+import { ai } from "../config";
 const TemplateRouter = express.Router();
-
+//can skip for now
 TemplateRouter.post("/", async (req, res) => {
     const prompt = req.body.prompt;
     try {
@@ -43,8 +43,5 @@ TemplateRouter.post("/", async (req, res) => {
         });
     }
 });
-
-
-
 
 export default TemplateRouter;
