@@ -9,6 +9,8 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     return;
   }
   const validate = jwt.verify(token as string, process.env.JWT_SECRET as string);
+  //@ts-ignore
+  req.userId = validate.userId;
   if (!validate) {
     res.status(401).json({ message: "Unauthorized" });
     return;

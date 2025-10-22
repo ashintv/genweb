@@ -1,11 +1,12 @@
 // ai agent workflow
 
 import express from "express";
-import { ai } from "../config/agent-config";
+
 import { getSystemPrompt } from "../lib/prompt";
 import { reactBasePrompt } from "../lib/defaults/react";
 import { expressBasePrompt } from "../lib/defaults/express";
 import { ApiError } from "@google/genai";
+import { ai } from "../config";
 const AgentRouter = express.Router();
 
 AgentRouter.post("/", async (req, res) => {
