@@ -5,6 +5,7 @@ import { PromptPage } from "./pages/prompt";
 import { SigninPage } from "./pages/signin";
 import { SignupPage } from "./pages/signup";
 import Landing from "./pages/landing";
+import ProfilePage from "./pages/profile";
 
 
 
@@ -14,6 +15,7 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Landing />} />
+					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/generate" element={<GeneratePage />} />
 					<Route path="/prompt" element={<PromptPage />} />
 					<Route path="/signin" element={<SigninPage />} />
